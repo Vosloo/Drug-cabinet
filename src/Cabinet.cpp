@@ -34,9 +34,26 @@ string Cabinet<T>::getInside() {
 }
 
 template <class T>
-string Cabinet<T>::toString() { 
+string Cabinet<T>::getDrugsInfo() { 
     string output = this->getInside();
     return output;
+}
+
+template <class T>
+string Cabinet<T>::toString() {
+    if (this->drugs.empty()) {
+        return "Cabinet is empty!";
+    }
+   
+    string drugNames = "";
+    for (auto& drug : this->drugs) {
+        drugNames += drug->getName() + ", ";
+    }
+
+    // Remove last coma and white space;
+    drugNames.erase(drugNames.size() - 2);
+
+    return drugNames;
 }
 
 template <class T>

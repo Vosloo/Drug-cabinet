@@ -5,7 +5,8 @@ class Ointment : public NonSolidDrug
 private:
     string applicationPlace;
 public:
-    Ointment(string name, string description, bool prescription);
-    void setInfo(int volume, string applicationPlace);
+    Ointment(string name, string description, 
+             bool prescription, string applicationPlace);
+    void setInfo(int volume);
     string toString() override;
 };

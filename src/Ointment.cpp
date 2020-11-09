@@ -1,17 +1,18 @@
 #include "Ointment.hpp"
 
-Ointment::Ointment(string name, string description, bool prescription) {
+Ointment::Ointment(string name, string description,
+                    bool prescription, string applicationPlace) {
     this->name = name;
     this->description = description;
     this->prescription = prescription;
+    this->applicationPlace = applicationPlace;
 }
 
-void Ointment::setInfo(int volume, string applicationPlace) {
+void Ointment::setInfo(int volume) {
     if (volume <= 0) {
         throw string("Volume must be greater than zero!");
     }
     this->volume = volume;
-    this->applicationPlace = applicationPlace;
 }
 
 string Ointment::toString() {

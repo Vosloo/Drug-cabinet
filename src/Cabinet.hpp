@@ -13,6 +13,7 @@ private:
     void removeDrug(string drugName);
 public:
     string toString();
+    string getDrugsInfo();
     int count();
 
     Cabinet<T>& operator+=(unique_ptr<T> drug);
