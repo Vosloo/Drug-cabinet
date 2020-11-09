@@ -11,11 +11,15 @@ protected:
     double price;
     bool prescription;
 public:
+    virtual ~Drug() {}
     virtual string toString() = 0;
     void setPrice(double price) { 
         if (price < 0) {
             throw string("Price cannot be lower than zero!\n");
         }
         this->price = price; 
+    }
+    string getName() {
+        return this->name;
     }
 };

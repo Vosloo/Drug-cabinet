@@ -8,7 +8,7 @@ Ointment::Ointment(string name, string description, bool prescription) {
 
 void Ointment::setInfo(int volume, string applicationPlace) {
     if (volume <= 0) {
-        throw string("Volume must be greater than zero!\n");
+        throw string("Volume must be greater than zero!");
     }
     this->volume = volume;
     this->applicationPlace = applicationPlace;

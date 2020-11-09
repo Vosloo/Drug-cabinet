@@ -9,7 +9,7 @@ Antibiotic::Antibiotic(string name, string description, bool prescription) {
 
 void Antibiotic::setInfo(string bacteria, int ageDestiny, int packageSize) {
     if (packageSize < 0) {
-        throw string("Package size cannot be lower than zero!\n");
+        throw string("Package size cannot be lower than zero!");
     }
     this->bacteria = bacteria;
     this->ageDestiny = ageDestiny;
@@ -21,8 +21,8 @@ string Antibiotic::toString() {
     return (
         name + ": " + description + '\n' +
         "Kills bacteria: " + bacteria + '\n' +
-        "Age destiny: " + (ageDestiny > 0 ? to_string(ageDestiny) + "+" : "all ages") + '\n' +
         "Only on prescription: " + (prescription ? "yes" : "no") + '\n' +
+        "Age destiny: " + (ageDestiny > 0 ? to_string(ageDestiny) + "+" : "all ages") + '\n' +
         "Package size: " + to_string(packageSize) + '\n' +
         "Price: " + to_string(price) + "$"
     );

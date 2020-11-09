@@ -10,7 +10,7 @@ PainKiller::PainKiller(string name, string description, bool prescription, bool 
 
 void PainKiller::setInfo(int packageSize, int maxDailyDosage) {
     if (packageSize < 0) {
-        throw string("Package size cannot be lower than zero!\n");
+        throw string("Package size cannot be lower than zero!");
     }
     this->packageSize = packageSize;
     this->maxDailyDosage = maxDailyDosage;

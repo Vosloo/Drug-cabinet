@@ -8,7 +8,7 @@ Syrup::Syrup(string name, string description, bool prescription) {
 
 void Syrup::setInfo(int volume, int density) {
     if (volume <= 0 || density <= 0) {
-        throw string("Volume and density must be greater than zero!\n");
+        throw string("Volume and density must be greater than zero!");
     }
     this->volume = volume;
     this->density = density;
