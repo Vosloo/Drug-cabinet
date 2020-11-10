@@ -19,23 +19,26 @@ double Disease::getRecovery() {
 template <class T>
 int Disease::pandemic(unique_ptr<Cabinet<T>>& cabinet) {
     srand(time(NULL));
+
+    const int ACCURACY = 1000;
     
     int day = 0;
     while ((*cabinet).count() != 0)
     {
         day++;
-        int randDelete = (rand() % 100) + 1;
-        if (randDelete <= (int)(this->pDisease * 100)) {
+        int randDelete = (rand() % ACCURACY) + 1;
+        if (randDelete <= (int)(this->pDisease * ACCURACY)) {
             // Drug marked as to be deleted;
 
-            int randRestore = (rand() % 100) + 1;
-            if (randRestore <= (int)((1 - this->pRecovery) * 100)) {
+            int randRestore = (rand() % ACCURACY) + 1;
+            if (randRestore <= (int)((1 - this->pRecovery) * ACCURACY)) {
                 // Restore drug, so don't delete in the first place;
                 // Nothing
             }
             else {
                 // Delete drug permanently;
-                string drugName = (*cabinet).getDrugName(0);
+                int randomDrug = rand() % (*cabinet).count();
+                string drugName = (*cabinet).getDrugName(randomDrug);
                 (*cabinet) -= drugName;
             }
         }
