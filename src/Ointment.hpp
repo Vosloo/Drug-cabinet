@@ -1,3 +1,4 @@
+#pragma once
 #include "NonSolidDrug.hpp"
 
 class Ointment : public NonSolidDrug

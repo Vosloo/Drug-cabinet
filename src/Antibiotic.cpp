@@ -18,7 +18,7 @@ void Antibiotic::setInfo(int ageDestiny, int packageSize) {
 
 string Antibiotic::toString() {
     return (
-        name + ": " + description + '\n' +
+        name + " (Antibiotic): " + description + '\n' +
         "Only on prescription: " + (prescription ? "yes" : "no") + '\n' +
         "Age destiny: " + (ageDestiny > 0 ? to_string(ageDestiny) + "+" : "all ages") + '\n' +
         "Package size: " + to_string(packageSize) + '\n' +

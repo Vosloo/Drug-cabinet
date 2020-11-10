@@ -1,8 +1,13 @@
-#include "Cabinet.cpp"
-#include "PainKiller.cpp"
-#include "Antibiotic.cpp"
-#include "Ointment.cpp"
-#include "Syrup.cpp"
+#include <iostream>
+#include <algorithm>
+#include <memory>
+#include "Cabinet.hpp"
+#include "Disease.hpp"
+#include "PainKiller.hpp"
+#include "Antibiotic.hpp"
+#include "Ointment.hpp"
+#include "Syrup.hpp"
+
 
 
 template <class T>
@@ -51,40 +56,76 @@ void createDrug(string name, int curRand, Cabinet<T>& cabinet) {
         }}
 }
 
+template <typename type>
+void getInput(type* var, string probability) {
+    if (is_same<type, int>::value) {
+        // int - number of drugs
+        cout << "How many drugs do you want to create?" << '\n';
+        cout << "Number: ";
+        cin >> *var;
+    
+        while (!cin.good() || *var <= 0) {
+            cout << "Supplied value is invalid. Valid range: (0; inf)" << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Number: ";
+            cin >> *var;
+        }
+    }
+    else if (is_same<type, double>::value) {
+        // double - probabilities
+        cout << "What is the probability of " << probability + "?" << '\n';
+        cout << "Number: ";
+        cin >> *var;
+
+        while (!cin.good() || *var < 0 || *var > 1) {
+            cout << "Supplied value is invalid. Valid range: <0; 1>" << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Number: ";
+            cin >> *var;
+        }
+    }
+    else {
+        throw string("Wrong type!");
+    }
+}
+
 
 int main(int argc, char const *argv[])
 {
     int drugCount;
-    cout << "How many drugs do you want to create?" << '\n';
-    cout << "Number: ";
-    cin >> drugCount;
-
-    while (!cin.good() || drugCount <= 0) {
-        cout << "Supplied value is invalid, try again." << endl;
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Number: ";
-        cin >> drugCount;
-    }
+    double pRecovery;
+    double pDisease;
+    getInput(&drugCount, "");
+    getInput(&pDisease, "disease");
+    getInput(&pRecovery, "recovery");
 
     auto cabinet = make_unique<Cabinet<Drug>>();
 
-    char letters[] = "abcdefghijklmnopqrstuvwxyz";
+    // Creating drugCount number of drugs;
     srand(time(NULL));
     for (int i = 0; i < drugCount; i++) {
         auto curRand = rand();
-        string name = "";
+        string name = "Drug" + to_string(i);
         
-        for (int i = 0; i < 8; i++) {
-            char x = letters[rand() % 26];
-            name += x;
-        }
         createDrug(name, curRand, *cabinet);
     }
 
-    cout << "Number of drugs in cabinet: " +
-            to_string(cabinet->count()) << endl;
-    cout << "Drugs in cabinet: " + cabinet->toString() << endl;
+    cout.clear();
+    cout << "\nNumber of drugs in cabinet: " + to_string(cabinet->count()) << endl;
+    cout << "Drugs in cabinet: " + cabinet->toString() << '\n' << endl;
+
+    auto disease = make_unique<Disease>(pDisease, pRecovery);
+
+    cout << "Pandemic time has come! Currently set parameters:\n" <<
+            "Probability of disease: " + to_string(disease->getDisease()) + "\n" <<
+            "Probability of recovery: " + to_string(disease->getRecovery()) << endl;
+
+    // Start pandemic
+    int daysSurvived = disease->pandemic(cabinet);
+    cout << "\nThe day the drugs ran out: " + to_string(daysSurvived) <<
+            ".\nBetter luck next time!" << endl;
 
     return 0;
 }

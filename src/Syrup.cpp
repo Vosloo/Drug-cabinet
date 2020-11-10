@@ -16,7 +16,7 @@ void Syrup::setInfo(int volume, int density) {
 
 string Syrup::toString() {
     return (
-        name + ": " + description + '\n' +
+        name + " (Syrup): " + description + '\n' +
         "Only on prescription: " + (prescription ? "yes" : "no") + '\n' +
         "Density: " + to_string(density) + '\n' +
         "Volume: " + to_string(volume) + '\n' +

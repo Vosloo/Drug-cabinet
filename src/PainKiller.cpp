@@ -19,7 +19,7 @@ void PainKiller::setInfo(int packageSize, int maxDailyDosage) {
 
 string PainKiller::toString() {
     return (
-        name + ": " + description + '\n' +
+        name + " (Painkiller): " + description + '\n' +
         "Only for adults: " + (onlyAdults ? "yes" : "no") + '\n' +
         "Only on prescription: " + (prescription ? "yes" : "no") + '\n' +
         "Package size: " + to_string(packageSize) + '\n' +

@@ -1,5 +1,5 @@
+#pragma once
 #include <vector>
-#include <memory>
 #include "Drug.hpp"
 
 
@@ -14,8 +14,11 @@ private:
 public:
     string toString();
     string getDrugsInfo();
+    string getDrugName(int index);
     int count();
 
     Cabinet<T>& operator+=(unique_ptr<T> drug);
     Cabinet<T>& operator-=(string drugName);
 };
+
+#include "Cabinet_impl.hpp"

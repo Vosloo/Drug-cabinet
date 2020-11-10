@@ -1,3 +1,4 @@
+#pragma once
 #include "SolidDrug.hpp"
 
 class Antibiotic : public SolidDrug

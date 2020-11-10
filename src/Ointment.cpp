@@ -17,7 +17,7 @@ void Ointment::setInfo(int volume) {
 
 string Ointment::toString() {
     return (
-        name + ": " + description + '\n' +
+        name + " (Ointment): " + description + '\n' +
         "Application place: " + applicationPlace + '\n' +
         "Only on prescription: " + (prescription ? "yes" : "no") + '\n' +
         "Volume: " + to_string(volume) + '\n' +

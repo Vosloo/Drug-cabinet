@@ -1,6 +1,6 @@
-#include "Cabinet.hpp"
+#include <memory>
 #include <iostream>
-#include <algorithm>
+#include "Cabinet.hpp"
 
 template <class T>
 void Cabinet<T>::addDrug(unique_ptr<T> drug) {
@@ -9,14 +9,13 @@ void Cabinet<T>::addDrug(unique_ptr<T> drug) {
 
 template <class T>
 void Cabinet<T>::removeDrug(string drugName) {
+    int index = 0;
     for (auto& drug : this->drugs) {
         if (drug->getName() == drugName) {
-            this->drugs.erase(
-                remove(this->drugs.begin(), this->drugs.end(), drug), 
-                this->drugs.end()
-            );
+            this->drugs.erase(this->drugs.begin() + index);
             return;
         }
+        index++;
     }
     throw string("No drug with given name in the cabinet!");
 }
@@ -42,11 +41,16 @@ string Cabinet<T>::getDrugsInfo() {
 template <class T>
 string Cabinet<T>::toString() {
     if (this->drugs.empty()) {
-        return "Cabinet is empty!";
+        return "Cabinet is empty, everyone is going to die now :(";
     }
    
     string drugNames = "";
     for (auto& drug : this->drugs) {
+        if (drug == nullptr) {
+            throw exception();
+            cout << "??? Should not happen here ???" << endl;
+            continue;
+        }
         drugNames += drug->getName() + ", ";
     }
 
@@ -59,6 +63,11 @@ string Cabinet<T>::toString() {
 template <class T>
 int Cabinet<T>::count() {
     return this->drugs.size();
+}
+
+template <class T>
+string Cabinet<T>::getDrugName(int index) {
+    return this->drugs.at(index)->getName();
 }
 
 template <class T>
